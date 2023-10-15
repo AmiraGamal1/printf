@@ -17,8 +17,10 @@ int _printf(const char *format, ...)
 		{'%', _percent}
 	};
 	va_start(args, format);
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+			return (-1);
 
-	while (*format)
+	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
@@ -32,6 +34,8 @@ int _printf(const char *format, ...)
 			{
 				counter += m[i].f(args);
 			}
+			else
+				return (-1);
 		}
 		else
 		{
