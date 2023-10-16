@@ -11,11 +11,11 @@ int _printf(const char *format, ...)
 	match_f m[] = {
 		{'c', _printf_char}, {'s', _printf_string},
 	};
-	
+
 	num_sp = sizeof(m) / sizeof(match_f);
 	va_start(args, format);
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
-		return (undef_f());
+		return (-1);
 	while (*format != '\0')
 	{
 		if (*format == '%')
@@ -33,8 +33,6 @@ int _printf(const char *format, ...)
 					i++;
 				if (*format == m[i].c)
 					counter += m[i].f(args);
-				else
-					return (undef_f());
 			}
 		}
 		else
