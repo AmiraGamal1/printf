@@ -7,40 +7,40 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int counter = 0, i, num_sp;
-	match_f m[] = {
-		{'c', _printf_char}, {'s', _printf_string},
-	};
+	int counter = 0, j = 0;
+	int (*function)(va_list);
 
-	num_sp = sizeof(m) / sizeof(match_f);
 	va_start(args, format);
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+	if (format == NULL || (format[j] == '%' && !format[j]))
 		return (-1);
-	while (*format != '\0')
+	while (format[j] != '\0')
 	{
-		if (*format == '%')
+		if (format[j] == '%')
 		{
 			/* look for the specifier */
-			format++;
-			if (*format == '%')
+			j++;
+			if (format[j] == '\0')
+				return (-1);
+			else if (format[j] == '%')
 			{
 				_putchar('%');
 				counter++;
 			}
 			else
-			{	i = 0;
-				while (*format != m[i].c && i < num_sp)
-					i++;
-				if (*format == m[i].c)
-					counter += m[i].f(args);
+			{
+				function = _match(format[j]);
+				if (function)
+					counter += function(args);
+				else
+					return (-1);
 			}
 		}
 		else
 		{
-			_putchar(*format);
+			_putchar(format[j]);
 			counter++;
 		}
-		format++;
+		j++;
 	}
 	va_end(args);
 	return (counter);
