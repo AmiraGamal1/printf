@@ -9,7 +9,7 @@ int _printf_string(va_list args)
 {
 	char *s;
 	int count = 0, len = 0;
-	char *error = "(nill)";
+	char *error = "(null)";
 
 	s = va_arg(args, char *);
 	if (s == NULL)
