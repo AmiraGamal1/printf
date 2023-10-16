@@ -33,6 +33,12 @@ int _printf(const char *format, ...)
 					i++;
 				if (*format == m[i].c)
 					counter += m[i].f(args);
+				else
+				{
+					counter += undef_f();
+					return (counter);
+				}
+
 			}
 		}
 		else

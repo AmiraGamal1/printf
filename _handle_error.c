@@ -7,46 +7,12 @@
 int undef_f(void)
 {
 	char *error = "Undefinded format";
+	int i = 0;
 
-	while (*error)
+	while (error[i])
 	{
-		_putchar(*error);
-		error++;
+		_putchar(error[i]);
+		i++;
 	}
-	return (-1);
-}
-/**
-  * _error - check if the number of arg == number of format
-  * @format: number of format
-  * @args: number of arguments
-  * Return: nothings
-  */
-int _error(int format, int args)
-{
-	char *less = "Erorr, number of format is greater than arguments";
-
-	if (format > args)
-	{
-		while (*less)
-		{
-			_putchar(*less);
-			less++;
-		}
-	}
-	return (-1);
-}
-/**
-  * _mismatch - mismatch type
-  * Return: -1
-  */
-int _mismatch(void)
-{
-	char *s = "Mismatch format with argument data type";
-
-	while (*s)
-	{
-		_putchar(*s);
-		s++;
-	}
-	return (-1);
+	return (i);
 }
