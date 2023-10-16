@@ -8,14 +8,26 @@
 int _printf_string(va_list args)
 {
 	char *s;
-	int count = 0;
+	int count = 0, len = 0;
+	char *error = "(nill)";
 
 	s = va_arg(args, char *);
-	while (s[count])
+	if (s == NULL)
 	{
-		_putchar(s[count]);
-		count++;
+		while (error[len])
+		{
+			_putchar(error[len]);
+			len++;
+		}
+		return (len);
 	}
-
-	return (count);
+	else
+	{
+		while (s[count])
+		{
+			_putchar(s[count]);
+			count++;
+		}
+		return (count);
+	}
 }

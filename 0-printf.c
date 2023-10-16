@@ -7,35 +7,35 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	/* counter : number of char write to stdout */
-	/* f_count: num of conversion specifiers */
-	/* arg_count: number of arg passed(success) -1 (fail) */
-	unsigned int counter = 0, i;
-
+	int counter = 0, i, num_sp;
 	match_f m[] = {
 		{'c', _printf_char}, {'s', _printf_string},
-		{'%', _percent}
 	};
+	
+	num_sp = sizeof(m) / sizeof(match_f);
 	va_start(args, format);
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
-			return (-1);
-
+		return (undef_f());
 	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
+			/* look for the specifier */
 			format++;
-			/* match format with function */
-			while (*format != m[i].c && i < 3)
+			if (*format == '%')
 			{
-				i++;
-			}
-			if (*format == m[i].c)
-			{
-				counter += m[i].f(args);
+				_putchar('%');
+				counter++;
 			}
 			else
-				return (-1);
+			{	i = 0;
+				while (*format != m[i].c && i < num_sp)
+					i++;
+				if (*format == m[i].c)
+					counter += m[i].f(args);
+				else
+					return (undef_f());
+			}
 		}
 		else
 		{
@@ -44,7 +44,6 @@ int _printf(const char *format, ...)
 		}
 		format++;
 	}
-	/* flash va */
 	va_end(args);
 	return (counter);
 }
