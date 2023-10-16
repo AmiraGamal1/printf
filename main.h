@@ -15,6 +15,5 @@ int _putchar(char c);
 int _printf(const char *format, ...);
 int _printf_char(va_list args);
 int _printf_string(va_list args);
-int undef_f(void);
 
 #endif
