@@ -7,7 +7,7 @@
   * @b: array of bits
   * Return: number of bits
   */
-int print_bin(unsigned int n)
+int print_bin(int n)
 {
 	int d;
 
@@ -20,7 +20,7 @@ int print_bin(unsigned int n)
 	else
 	{
 		_putchar((n % 2) + '0');
-		return (1);
+		return (0);
 	}
 }
 
@@ -31,10 +31,9 @@ int print_bin(unsigned int n)
   */
 int _printf_bin(va_list args)
 {
-	unsigned int n;
-	int count;
+	int count, n;
 
-	n = va_arg(args, unsigned int);
+	n = va_arg(args, int);
 	if (n == 0)
 	{
 		_putchar('0');
