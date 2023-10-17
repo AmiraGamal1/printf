@@ -9,7 +9,9 @@ int (*_match(char format))(va_list)
 {
 	int i = 0;
 	match_f m[] = {
-		{'c', _printf_char}, {'s', _printf_string}, {-1, NULL}
+		{'c', _printf_char}, {'s', _printf_string},
+		{'d', _printf_int}, {'i', _printf_int},
+		{'b', _printf_bin}, {-1, NULL}
 	};
 
 	while (m[i].c)
