@@ -3,6 +3,8 @@
 /**
   * print_bin - convert int to bin and print it
   * @n: unsigned int
+  * @i: index
+  * @b: array of bits
   * Return: number of bits
   */
 int print_bin(unsigned int n, unsigned int i, char *b)
