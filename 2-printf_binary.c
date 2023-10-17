@@ -20,7 +20,7 @@ int print_bin(unsigned int n)
 	else
 	{
 		_putchar((n % 2) + '0');
-		return (0);
+		return (1);
 	}
 }
 

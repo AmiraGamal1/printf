@@ -11,7 +11,9 @@ int (*_match(char format))(va_list)
 	match_f m[] = {
 		{'c', _printf_char}, {'s', _printf_string},
 		{'d', _printf_int}, {'i', _printf_int},
-		{'b', _printf_bin}, {-1, NULL}
+		{'b', _printf_bin}, {'u', _printf_unint},
+		{'o', _printf_oct}, {'x', _printf_hex},
+		{'X', _printf_uhex}, {-1, NULL}
 	};
 
 	while (m[i].c)
