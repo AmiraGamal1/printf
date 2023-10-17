@@ -18,7 +18,7 @@ int _printf_string(va_list args);
 int (*_match(char format))(va_list);
 int print_number(int n);
 int _printf_int(va_list args);
-int print_bin(unsigned int n);
+int print_bin(unsigned int n, unsigned int i, char *b);
 int _printf_bin(va_list args);
 
 #endif
