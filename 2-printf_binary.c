@@ -7,19 +7,19 @@
   * @b: array of bits
   * Return: number of bits
   */
-int print_bin(unsigned int n, unsigned int i, char *b)
+int print_bin(unsigned int n)
 {
 	int d;
 
 	if (n / 2)
 	{
-		d = print_bin(n / 2, i + 1, b);
-		b[i] = (n % 2) + '0';
+		d = print_bin(n / 2);
+		_putchar((n % 2) + '0');
 		return (d + 1);
 	}
 	else
 	{
-		b[i] = (n % 2) + '0';
+		_putchar((n % 2) + '0');
 		return (0);
 	}
 }
@@ -31,40 +31,16 @@ int print_bin(unsigned int n, unsigned int i, char *b)
   */
 int _printf_bin(va_list args)
 {
-	int n, count, i;
-	char *b;
+	unsigned int n;
+	int count;
 
-	b = malloc(sizeof(char) * (32 + 1));
 	n = va_arg(args, unsigned int);
-	if (n < 0)
-	{
-		n = -n;
-		count = print_bin(n, 0, b);
-		i = count;
-		while (i >= 0)
-		{
-			if (b[i] == '0')
-				_putchar('1');
-			else
-				_putchar('0');
-			i--;
-		}
-	}
-	else if (n == 0)
+	if (n == 0)
 	{
 		_putchar('0');
 		count = 1;
 	}
 	else
-	{
-		count = print_bin(n, 0, b);
-		i = count;
-		while (i >= 0)
-		{
-			_putchar(b[i]);
-			i--;
-		}
-	}
-	free(b);
+		count = print_bin(n);
 	return (count);
 }
