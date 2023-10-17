@@ -35,7 +35,7 @@ int _printf_bin(va_list args)
 	char *b;
 
 	b = malloc(sizeof(char) * (32 + 1));
-	n = va_arg(args, int);
+	n = va_arg(args, unsigned int);
 	if (n < 0)
 	{
 		n = -n;
