@@ -24,8 +24,8 @@ int print_oct(unsigned int n)
 }
 
 /**
-  * print_oct - print unsigned int into the octal
-  * @n: unsigned int
+  * _printf_oct - print unsigned int into the octal
+  * @args: argument
   * Return: count
   */
 int _printf_oct(va_list args)

@@ -3,11 +3,9 @@
 /**
   * print_bin - convert int to bin and print it
   * @n: unsigned int
-  * @i: index
-  * @b: array of bits
   * Return: number of bits
   */
-int print_bin(int n)
+int print_bin(unsigned int n)
 {
 	int d;
 
@@ -31,9 +29,10 @@ int print_bin(int n)
   */
 int _printf_bin(va_list args)
 {
-	int count, n;
+	int count;
+	unsigned int n;
 
-	n = va_arg(args, int);
+	n = va_arg(args, unsigned int);
 	if (n == 0)
 	{
 		_putchar('0');

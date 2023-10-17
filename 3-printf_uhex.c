@@ -7,6 +7,7 @@
 int print_uhex(unsigned int n)
 {
 	int d, r;
+
 	if (n / 16)
 	{
 		d = print_uhex(n / 16);

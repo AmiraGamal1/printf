@@ -33,8 +33,6 @@ int _printf(const char *format, ...)
 				function = _match(format[j]);
 				if (function)
 					counter += function(args);
-				else
-					return (-1);
 			}
 		}
 		else

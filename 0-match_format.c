@@ -22,5 +22,7 @@ int (*_match(char format))(va_list)
 			return (m[i].f);
 		i++;
 	}
+	_putchar('%');
+	_putchar(format);
 	return (NULL);
 }
