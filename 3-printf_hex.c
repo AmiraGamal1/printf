@@ -4,17 +4,17 @@
   * @n: int
   * Return: count
   */
-int print_hex(unsigned int n)
+int print_hex(unsigned int n, char *num, int i)
 {
 	int d, r;
 
 	if (n / 16)
 	{
-		d = print_hex(n / 16);
+		d = print_hex(n / 16, num, i + 1);
 		r = n % 16;
 		if (r > 9)
 			r += 39;
-		_putchar(r + '0');
+		num[i] = r + '0';
 		return (d + 1);
 	}
 	else
@@ -22,7 +22,7 @@ int print_hex(unsigned int n)
 		r = n % 16;
 		if (r > 9)
 			r += 39;
-		_putchar(r + '0');
+		num[i] = r + '0';
 		return (1);
 	}
 }
@@ -31,13 +31,21 @@ int print_hex(unsigned int n)
   * @args: arguments
   * Return: count
   */
-int _printf_hex(va_list args)
+int _printf_hex(va_list args, char *buffer, int *ibuf)
 {
 	unsigned int n;
 	int count;
+	char *num;
 
 	n = va_arg(args, unsigned int);
-	count = print_hex(n);
+	num = malloc(sizeof(char) * 32);
+	if (!num)
+		return (-1);
 
+	count = print_hex(n, num, 0);
+	rev_string(num, count);
+	handle_buffer(buffer, ibuf, num, count);
+
+	free(num);
 	return (count);
 }

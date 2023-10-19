@@ -5,7 +5,7 @@
   * @format: format
   * Return: pointer to the function
   */
-int (*_match(char format))(va_list)
+int (*_match(char format))(va_list, char *, int *)
 {
 	int i = 0;
 	match_f m[] = {

@@ -5,29 +5,40 @@
   * @args: argument
   * Return: number of argument puts to stdout
   */
-int _printf_string(va_list args)
+int _printf_string(va_list args, char *buffer,int *ibuf)
 {
 	char *s;
 	int count = 0, len = 0;
-	char *error = "(null)";
+	char *error = "(null)", *str;
 
 	s = va_arg(args, char *);
+	/* count string length */
+	while (s && s[len])
+		len++;
 	if (s == NULL)
 	{
-		while (error[len])
+		str = malloc(sizeof(char) * 6);
+		if (!str)
+			return (-1);
+		while (count < 6)
 		{
-			_putchar(error[len]);
-			len++;
+			str[count] = error[count];
+			count++;
 		}
-		return (len);
 	}
 	else
 	{
+		str = malloc(sizeof(char) * len);
+		if (!str)
+			return (-1);
 		while (s[count])
 		{
-			_putchar(s[count]);
+			str[count] = s[count];
 			count++;
 		}
-		return (count);
 	}
+	handle_buffer(buffer, ibuf, str, count);
+	free(str);
+
+	return (count);
 }

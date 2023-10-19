@@ -4,26 +4,26 @@
   * @n: int
   * Return: number of digits
   */
-int print_number(int n)
+int print_number(int n, char *num, int i)
 {
 	unsigned int N, d;
 
 	if (n < 0)
 	{
 		N = -n;
-		_putchar('-');
+		num[i] = '-';
 	}
 	else
 		N = n;
 	if (N / 10)
 	{
-		d = print_number(N / 10);
-		_putchar((N % 10) + '0');
+		d = print_number(N / 10, num, i + 1);
+		num[i] = (N % 10) + '0';
 		return (d + 1);
 	}
 	else
 	{
-		_putchar((N % 10) + '0');
+		num[i] = (N % 10) + '0';
 		return (1);
 	}
 }
@@ -32,13 +32,21 @@ int print_number(int n)
   * @args: argument
   * Return: num of digits if success else -1
   */
-int _printf_int(va_list args)
+int _printf_int(va_list args, char *buffer, int *ibuf)
 {
 	int n, count;
+	char *num;
 
+	num = malloc(sizeof(char) * 32);
+	if (!num)
+		return (-1);
 	n = va_arg(args, int);
-	count = print_number(n);
+	count = print_number(n, num, 0);
+	rev_string(num, count);
 	if (n < 0)
 		count += 1;
+	handle_buffer(buffer, ibuf, num, count);	
+
+	free(num);
 	return (count);
 }

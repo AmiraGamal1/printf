@@ -5,20 +5,20 @@
   * @n: unsigned int
   * Return: number of bits
   */
-int print_bin(unsigned int n)
+int print_bin(unsigned int n, char *num, int i)
 {
 	int d;
 
-	if (n / 2)
+	if (n >> 1)
 	{
-		d = print_bin(n / 2);
-		_putchar((n % 2) + '0');
+		d = print_bin(n >> 1, num, i + 1);
+		num[i] = (n & 1) ? '1' : '0';
 		return (d + 1);
 	}
 	else
 	{
-		_putchar((n % 2) + '0');
-		return (0);
+		num[i] = (n & 1) ? '1' : '0';
+		return (1);
 	}
 }
 
@@ -27,18 +27,20 @@ int print_bin(unsigned int n)
   * @args: argument
   * Return: count
   */
-int _printf_bin(va_list args)
+int _printf_bin(va_list args, char *buffer, int *ibuf)
 {
 	int count;
 	unsigned int n;
+	char *num;
 
 	n = va_arg(args, unsigned int);
-	if (n == 0)
-	{
-		_putchar('0');
-		count = 1;
-	}
-	else
-		count = print_bin(n);
+	num = malloc(sizeof(char) * 65);
+	if (!num)
+		return (-1);	
+	count = print_bin(n, num, 0);
+	rev_string(num, count);
+	handle_buffer(buffer, ibuf, num, count);
+
+	free(num);
 	return (count);
 }
