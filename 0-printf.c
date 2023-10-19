@@ -1,5 +1,11 @@
-
 #include "main.h"
+/**
+  * unkown_format - handle unkown format
+  * @format: format
+  * @i: index
+  * Return: counter
+  */
+
 /**
   * _printf - formmated print to stdout
   * @format: string of ordinary char and formats
@@ -11,7 +17,6 @@ int _printf(const char *format, ...)
 	int counter = 0, j = 0, ind = 0;
 	int *ibuf = &ind;
 	int (*function)(va_list, char *, int *);
-	char c[1];
 	char buffer[BUF_SIZE];
 
 	buffer[BUF_SIZE - 1] = '\0';
@@ -28,8 +33,7 @@ int _printf(const char *format, ...)
 				return (-1);
 			else if (format[j] == '%')
 			{
-				c[0] = format[j];
-				handle_buffer(buffer, ibuf, c, 1);
+				handle_buffer(buffer, ibuf, format[j]);
 				counter++;
 			}
 			else
@@ -41,14 +45,12 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			c[0] = format[j];
-			handle_buffer(buffer, ibuf, c, 1);
+			handle_buffer(buffer, ibuf, format[j]);
 			counter++;
 		}
 		j++;
 	}
-	c[0] = format[j];
-	handle_buffer(buffer, ibuf, c, 1);
+	handle_buffer(buffer, ibuf, format[j]);
 	va_end(args);
 	return (counter);
 }

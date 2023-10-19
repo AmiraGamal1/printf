@@ -22,7 +22,6 @@ int (*_match(char format))(va_list, char *, int *)
 			return (m[i].f);
 		i++;
 	}
-	_putchar('%');
-	_putchar(format);
+	/* i need to handle what to do if the format not find */
 	return (NULL);
 }

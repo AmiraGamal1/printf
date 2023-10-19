@@ -3,22 +3,23 @@
 /**
   * print_oct - print unsigned int into the octal
   * @n: unsigned int
+  * @buffer: buffer
+  * @ibuf: index
   * Return: count
   */
-int print_oct(unsigned int n, char *num, int i)
+int print_oct(unsigned int n, char *buffer, int *ibuf)
 {
 	int d;
 
 	if (n / 8)
 	{
-		d = print_oct(n / 8, num, i + 1);
-		num[i] = n % 8 + '0';
-
+		d = print_oct(n / 8, buffer, ibuf);
+		handle_buffer(buffer, ibuf, n % 8 + '0');
 		return (d + 1);
 	}
 	else
 	{
-		num[i] = n % 8 + '0';
+		handle_buffer(buffer, ibuf, n % 8 + '0');
 		return (1);
 	}
 }
@@ -26,22 +27,17 @@ int print_oct(unsigned int n, char *num, int i)
 /**
   * _printf_oct - print unsigned int into the octal
   * @args: argument
+  * @buffer: buffer
+  * @ibuf: index
   * Return: count
   */
 int _printf_oct(va_list args, char *buffer, int *ibuf)
 {
 	unsigned int n;
 	int count;
-	char *num;
 
 	n = va_arg(args, unsigned int);
-	num = malloc(sizeof(char) * 32);
-	if (!num)
-		return (-1);
-	count = print_oct(n, num, 0);
-	rev_string(num, count);
-	handle_buffer(buffer, ibuf, num, count);
+	count = print_oct(n, buffer, ibuf);
 
-	free(num);
 	return (count);
 }

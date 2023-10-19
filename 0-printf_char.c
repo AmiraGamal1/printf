@@ -10,10 +10,8 @@
 int _printf_char(va_list args, char *buffer, int *ibuf)
 {
 	char c;
-	char s[1];
 
 	c = va_arg(args, int);
-	s[0] = c;
-	handle_buffer(buffer, ibuf, s, 1);
+	handle_buffer(buffer, ibuf, c);
 	return (1);
 }
